@@ -1,0 +1,139 @@
+/* Nombre: Patricia E. Ortega B. Matrícula: 21-EIIT-1-037 Sección: 0541 */
+
+CREATE DATABASE _IndustriaTextil
+USE _IndustriaTextil
+
+CREATE TABLE Materias_Primas
+(
+   ID_MateriaPrima int identity (1,1),
+   Nombre varchar (50) not null,
+   PrecioActual decimal (8,2) not null,
+   Producto varchar (50) not null,
+   PRIMARY KEY (ID_MateriaPrima)
+);
+
+CREATE TABLE Proveedores
+(
+   ID_Proveedor int identity (1,1),
+   Nombre varchar (100) not null,
+   MateriaPrima varchar (50) not null,
+   Precio decimal (8,2) not null,
+   Calidad varchar (10) not null,
+   PRIMARY KEY (ID_Proveedor)
+);
+
+CREATE TABLE Productos
+(
+   ID_Producto int identity (1,1),
+   Nombre varchar (50) not null,
+   ID_MateriaPrima int not null,
+   ID_Proveedor int not null,
+   PrecioVenta decimal (8,2) not null,
+   PRIMARY KEY (ID_Producto),
+   FOREIGN KEY (ID_MateriaPrima) REFERENCES Materias_Primas (ID_MateriaPrima),
+   FOREIGN KEY (ID_Proveedor) REFERENCES Proveedores (ID_Proveedor)
+);
+
+CREATE TABLE Clientes
+(
+   ID_Cliente int identity (1,1),
+   Nombre varchar (50) not null,
+   Teléfono varchar (12) not null,
+   Correo varchar (50) not null,
+   Dirección varchar (250),
+   PRIMARY KEY (ID_Cliente)
+);
+
+CREATE TABLE SeguimientosPostventas
+(
+   ID_Cliente int identity (1,1),
+   ID_Producto int not null,
+   NivelSatisfacción varchar (10) not null,
+   Problema varchar (250),
+   PRIMARY KEY (ID_Cliente),
+   FOREIGN KEY (ID_Cliente) REFERENCES Clientes (ID_Cliente),
+   FOREIGN KEY (ID_Producto) REFERENCES Productos (ID_Producto)
+);
+
+   INSERT Materias_Primas (Nombre, PrecioActual, Producto) VALUES ('Tela', 350, 'Saco');
+   INSERT Materias_Primas (Nombre, PrecioActual, Producto) VALUES ('Hilo', 82.3, 'Franela');
+   INSERT Materias_Primas (Nombre, PrecioActual, Producto) VALUES ('Encaje', 90, 'Blusa');
+   INSERT Materias_Primas (Nombre, PrecioActual, Producto) VALUES ('Cuero', 647.95, 'Chaqueta');
+   INSERT Materias_Primas (Nombre, PrecioActual, Producto) VALUES ('Botón', 45, 'Camisa');
+   INSERT Materias_Primas (Nombre, PrecioActual, Producto) VALUES ('Zíper', 78.67, 'Pantalón');
+   INSERT Materias_Primas (Nombre, PrecioActual, Producto) VALUES ('Lentejuela', 85, 'Vestido');
+   INSERT Materias_Primas (Nombre, PrecioActual, Producto) VALUES ('Broche', 69.9, 'Poloche');
+   INSERT Materias_Primas (Nombre, PrecioActual, Producto) VALUES ('Lana', 844.50, 'Abrigo');
+   INSERT Materias_Primas (Nombre, PrecioActual, Producto) VALUES ('Elástico', 30, 'Falda');
+
+   INSERT Proveedores (Nombre, MateriaPrima, Precio, Calidad)
+          VALUES ('Maxitex', 'Tela', 500, 'Muy buena');
+   INSERT Proveedores (Nombre, MateriaPrima, Precio, Calidad)
+          VALUES ('StarsQueen', 'Lentejuela', 62.27, 'Muy buena');
+   INSERT Proveedores (Nombre, MateriaPrima, Precio, Calidad)
+          VALUES ('Distribuidora CU', 'Cuero', 810, 'Buena');
+   INSERT Proveedores (Nombre, MateriaPrima, Precio, Calidad)
+          VALUES ('Elastiq', 'Elástico', 20.39, 'Mala');
+   INSERT Proveedores (Nombre, MateriaPrima, Precio, Calidad)
+          VALUES ('Distribuidora H!', 'Hilo', 150.68, 'Buena');
+   INSERT Proveedores (Nombre, MateriaPrima, Precio, Calidad)
+          VALUES ('Tienda BBB', 'Botón', 56, 'Regular');
+   INSERT Proveedores (Nombre, MateriaPrima, Precio, Calidad)
+          VALUES ('Ast.', 'Elástico', 40, 'Muy buena');
+   INSERT Proveedores (Nombre, MateriaPrima, Precio, Calidad)
+          VALUES ('Almacenes Linda', 'Lana', 930.88, 'Muy buena');
+   INSERT Proveedores (Nombre, MateriaPrima, Precio, Calidad)
+          VALUES ('BCH', 'Broche', 70, 'Muy buena');
+   INSERT Proveedores (Nombre, MateriaPrima, Precio, Calidad)
+          VALUES ('Rosis', 'Lentejuela', 45, 'Mala');
+   INSERT Proveedores (Nombre, MateriaPrima, Precio, Calidad)
+          VALUES ('Zip Zap', 'Zíper', 49.36, 'Buena');
+   INSERT Proveedores (Nombre, MateriaPrima, Precio, Calidad)
+          VALUES ('Encajes Perfect', 'Encaje', 76.99, 'Muy buena');
+   INSERT Proveedores (Nombre, MateriaPrima, Precio, Calidad)
+          VALUES ('Tienda Martínez', 'Broche', 50, 'Regular');
+   INSERT Proveedores (Nombre, MateriaPrima, Precio, Calidad)
+          VALUES ('BToon', 'Botón', 65.95, 'Muy buena');
+
+   INSERT Productos (Nombre, ID_MateriaPrima, ID_Proveedor, PrecioVenta) VALUES ('Vestido', 7, 2, 1850);
+   INSERT Productos (Nombre, ID_MateriaPrima, ID_Proveedor, PrecioVenta) VALUES ('Falda', 10, 7, 645.95);
+   INSERT Productos (Nombre, ID_MateriaPrima, ID_Proveedor, PrecioVenta) VALUES ('Pantalón', 6, 11, 525.84);
+   INSERT Productos (Nombre, ID_MateriaPrima, ID_Proveedor, PrecioVenta) VALUES ('Camisa', 5, 14, 405);
+   INSERT Productos (Nombre, ID_MateriaPrima, ID_Proveedor, PrecioVenta) VALUES ('Blusa', 3, 12, 370);
+   INSERT Productos (Nombre, ID_MateriaPrima, ID_Proveedor, PrecioVenta) VALUES ('Franela', 2, 5, 150.95);
+   INSERT Productos (Nombre, ID_MateriaPrima, ID_Proveedor, PrecioVenta) VALUES ('Poloche', 8, 9, 268);
+   INSERT Productos (Nombre, ID_MateriaPrima, ID_Proveedor, PrecioVenta) VALUES ('Chaqueta', 4, 3, 900);
+   INSERT Productos (Nombre, ID_MateriaPrima, ID_Proveedor, PrecioVenta) VALUES ('Saco', 1, 1, 1560.);
+   INSERT Productos (Nombre, ID_MateriaPrima, ID_Proveedor, PrecioVenta) VALUES ('Abrigo', 9, 8, 1200);
+
+   INSERT Clientes (Nombre, Teléfono, Correo, Dirección)
+          VALUES ('Rossmery Muñoz', '809-314-7280', 'mery21@gmail.com', 'C\ La Paz, #4, Las Flores');
+   INSERT Clientes (Nombre, Teléfono, Correo, Dirección)
+          VALUES ('Yoskar Soriano', '809-597-3027', 'yoskarsoriano@gmail.com', 'C\ Ocho, #57, Palma');
+   INSERT Clientes (Nombre, Teléfono, Correo, Dirección)
+          VALUES ('Esteban Tirado', '829-011-8192', 'esteban07@gmail.com', 'C\ Pérez C., #18, Barrio Nuevo');
+   INSERT Clientes (Nombre, Teléfono, Correo, Dirección)
+          VALUES ('Samantha Torres', '809-222-8418', 'sam@gmail.com', 'C\ Tercera, #31, Las Flores');
+   INSERT Clientes (Nombre, Teléfono, Correo, Dirección)
+          VALUES ('Perla Matías', '849-677-4440', 'perlamatías99@gmail.com', 'C\ Morrillo M., #2, Las Caobas');
+   INSERT Clientes (Nombre, Teléfono, Correo, Dirección)
+          VALUES ('Mariana García', '849-923-1324', 'marcía85@gmail.com', 'C\ Máximus T., #76, Cocodrilos');
+   INSERT Clientes (Nombre, Teléfono, Correo, Dirección)
+          VALUES ('Anthony Ruiz', '829-587-1913', 'ranthony@gmail.com', 'C\ Pedro R., #101, Las Estrellas');
+   INSERT Clientes (Nombre, Teléfono, Correo, Dirección)
+          VALUES ('Florentina Vera', '809-425-2001', 'florentina@gmail.com', 'C\ Francia, #47, Altos Montes');
+   INSERT Clientes (Nombre, Teléfono, Correo, Dirección)
+          VALUES ('Sebastián Domínguez', '809-976-0308', 'sebas46@gmail.com', 'C\ La Andanza, #99, Barrio Nuevo');
+   INSERT Clientes (Nombre, Teléfono, Correo, Dirección)
+          VALUES ('Henry Ceballos', '829-158-6429', 'henryceballos13@gmail.com', 'C\ Costutera, #115, Palma');
+
+   INSERT SeguimientosPostventas (ID_Producto, NivelSatisfacción, Problema) VALUES (5, 'Alto', '');
+   INSERT SeguimientosPostventas (ID_Producto, NivelSatisfacción, Problema) VALUES (10, 'Alto', '');
+   INSERT SeguimientosPostventas (ID_Producto, NivelSatisfacción, Problema) VALUES (9, 'Alto', '');
+   INSERT SeguimientosPostventas (ID_Producto, NivelSatisfacción, Problema) VALUES (8, 'Bajo', 'La textura no es lo que esperaba');
+   INSERT SeguimientosPostventas (ID_Producto, NivelSatisfacción, Problema) VALUES (2, 'Alto', '');
+   INSERT SeguimientosPostventas (ID_Producto, NivelSatisfacción, Problema) VALUES (3, 'Bajo', 'El zíper es sencillo');
+   INSERT SeguimientosPostventas (ID_Producto, NivelSatisfacción, Problema) VALUES (7, 'Alto', '');
+   INSERT SeguimientosPostventas (ID_Producto, NivelSatisfacción, Problema) VALUES (1, 'Alto', '');
+   INSERT SeguimientosPostventas (ID_Producto, NivelSatisfacción, Problema) VALUES (6, 'Alto', '');
+   INSERT SeguimientosPostventas (ID_Producto, NivelSatisfacción, Problema) VALUES (4, 'Medio', 'El servicio es lento');
